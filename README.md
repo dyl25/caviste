@@ -1,16 +1,5 @@
 # Projet caviste - partie backend
 
->        /^\
->       |   |
-> /\     |_|     /\
-> | \___/' `\___/ |
->  \_/  \___/  \_/
->   |\__/   \__/|
->   |/  \___/  \|
->  ./\__/   \__/\,
->  | /  \___/  \ |
->  \/     V     \/
-
 * Fichier de route: src/routes.php
 * Dossier de controller: src/Controller
 * Dossier de vue: src/views

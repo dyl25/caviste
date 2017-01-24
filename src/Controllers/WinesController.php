@@ -10,7 +10,7 @@ use \Psr\Http\Message\ResponseInterface;
  *
  * @author admin
  */
-class WinesController {
+class WinesController extends Controller{
 
     private $container;
 
@@ -21,14 +21,14 @@ class WinesController {
     public function index(RequestInterface $request, ResponseInterface $response, $args) {
 
         if (empty($args)) {
-            $this->container->view->render($response, 'wines/index.twig');
+            $this->render($response, 'wines/index.twig');
         } else {
-            $this->container->view->render($response, 'wines/search_id.twig');
+            $this->render($response, 'wines/search_id.twig');
         }
     }
 
     public function search(RequestInterface $request, ResponseInterface $response, $args) {
-        $this->container->view->render($response, 'wines/search.twig', ['wineName' => $args['name']]);
+        $this->render($response, 'wines/search.twig', ['wineName' => $args['name']]);
     }
 
     public function add(RequestInterface $request, ResponseInterface $response) {

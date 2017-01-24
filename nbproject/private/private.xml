@@ -5,6 +5,7 @@
         <group>
             <file>file:/D:/serv/UwAmp/www/caviste/src/Controllers/WinesController.php</file>
             <file>file:/D:/serv/UwAmp/www/caviste/src/views/layout.html.twig</file>
+            <file>file:/D:/serv/UwAmp/www/caviste/src/views/wines/home.html.twig</file>
             <file>file:/D:/serv/UwAmp/www/caviste/src/container.php</file>
             <file>file:/D:/serv/UwAmp/www/caviste/src/Controllers/Controller.php</file>
         </group>

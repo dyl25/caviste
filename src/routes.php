@@ -1,7 +1,7 @@
 <?php
 
 // Routes
-// 
+
 //Affichage d'un vin grâce à nom
 $app->get('/api/wines/search/{name}', Src\Controllers\WinesController::class . ':search');
 
@@ -13,3 +13,5 @@ $app->get('/api/wines', Src\Controllers\WinesController::class . ':index');
 
 //Ajout de vin
 $app->post('/api/wines', Src\Controllers\WinesController::class . ':add');
+
+$app->post('/home', Src\Controllers\WinesController::class . ':home');

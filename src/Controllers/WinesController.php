@@ -21,14 +21,18 @@ class WinesController extends Controller{
     public function index(RequestInterface $request, ResponseInterface $response, $args) {
 
         if (empty($args)) {
-            $this->render($response, 'wines/index.twig');
+            $this->render($response, 'wines/index.html.twig');
         } else {
-            $this->render($response, 'wines/search_id.twig');
+            $this->render($response, 'wines/search_id.html.twig');
         }
     }
 
+    public function home(RequestInterface $request, ResponseInterface $response){
+        $this->render($response, 'wines/home.html.twig')
+    }
+    
     public function search(RequestInterface $request, ResponseInterface $response, $args) {
-        $this->render($response, 'wines/search.twig', ['wineName' => $args['name']]);
+        $this->render($response, 'wines/search.html.twig', ['wineName' => $args['name']]);
     }
 
     public function add(RequestInterface $request, ResponseInterface $response) {

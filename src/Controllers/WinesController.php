@@ -12,12 +12,6 @@ use \Psr\Http\Message\ResponseInterface;
  */
 class WinesController extends Controller{
 
-    private $container;
-
-    public function __construct($container) {
-        $this->container = $container;
-    }
-
     public function index(RequestInterface $request, ResponseInterface $response, $args) {
 
         if (empty($args)) {
@@ -28,7 +22,7 @@ class WinesController extends Controller{
     }
 
     public function home(RequestInterface $request, ResponseInterface $response){
-        $this->render($response, 'wines/home.html.twig')
+        $this->render($response, 'wines/home.html.twig');
     }
     
     public function search(RequestInterface $request, ResponseInterface $response, $args) {

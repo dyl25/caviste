@@ -1,10 +1,5 @@
 <?php
 
-$container = $app->getContainer();
-
-// Create app
-$app = new \Slim\App();
-
 // Get container
 $container = $app->getContainer();
 

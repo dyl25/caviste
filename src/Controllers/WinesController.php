@@ -22,6 +22,7 @@ class WinesController extends Controller{
     }
 
     public function home(RequestInterface $request, ResponseInterface $response){
+        $result = $this->db;
         $this->render($response, 'wines/home.html.twig');
     }
     

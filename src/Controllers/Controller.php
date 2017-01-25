@@ -16,7 +16,7 @@ class Controller {
         $this->container = $container;
     }
     
-    public function render(ResponseInterface $response, $file) {
-        $this->container->view->render($response, $file);
+    public function render(ResponseInterface $response, $file, $args=null) {
+        $this->container->view->render($response, $file, $args);
     }
 }

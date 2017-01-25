@@ -23,12 +23,6 @@ $app = new \Slim\App($settings);
 
 require __DIR__ . '/../src/container.php';
 
-$container['pdo'] = function() {
-    $pdo = new PDO('mysql:dbname=cavavin;host=localhost', 'root', 'root');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $pdo;
-};
-
 // Set up dependencies
 require __DIR__ . '/../src/dependencies.php';
 

@@ -19,4 +19,8 @@ class Controller {
     public function render(ResponseInterface $response, $file, $args=null) {
         $this->container->view->render($response, $file, $args);
     }
+    
+    public function loadModel($modelName) {
+        return $this->container->$modelName;
+    }
 }

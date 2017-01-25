@@ -25,6 +25,10 @@ $container['pdo'] = function($container) {
     return $pdo;
 };
 
-$container['db'] = function($container) {
-    return new Database($this->pdo);
+/*$container['db'] = function($container) {
+    return $container->pdo);
+};*/
+
+$container['winesModel'] = function($container) {
+    return new Src\Models\WinesModel($container);
 };

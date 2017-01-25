@@ -14,4 +14,4 @@ $app->get('/api/wines', Src\Controllers\WinesController::class . ':index')->setN
 //Ajout de vin
 $app->post('/api/wines', Src\Controllers\WinesController::class . ':add')->setName('addWines');
 
-$app->post('/home', Src\Controllers\WinesController::class . ':home')->setName('home');
+$app->get('/home', Src\Controllers\WinesController::class . ':home')->setName('home');

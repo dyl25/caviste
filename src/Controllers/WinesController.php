@@ -10,21 +10,25 @@ use \Psr\Http\Message\ResponseInterface;
  *
  * @author admin
  */
-class WinesController extends Controller{
+class WinesController extends Controller {
 
     public function index(RequestInterface $request, ResponseInterface $response, $args) {
 
         if (empty($args)) {
-            $this->render($response, 'wines/index.html.twig');
+            $model = $this->loadModel('winesModel');
+            $result = $model->search();
+            $result = nl2br(json_encode($result, JSON_PRETTY_PRINT));
+            //$this->render($response, 'wines/index.html.twig', ['wineData' => $result]);
+            $response->getBody()->write($result);
         } else {
             $this->render($response, 'wines/search_id.html.twig');
         }
     }
 
-    public function home(RequestInterface $request, ResponseInterface $response){
+    public function home(RequestInterface $request, ResponseInterface $response) {
         $this->render($response, 'wines/home.html.twig');
     }
-    
+
     /**
      * Recherche un vin en particulier
      * @param RequestInterface $request

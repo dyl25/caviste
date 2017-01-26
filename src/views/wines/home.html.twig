@@ -1,1 +1,35 @@
-{{ wineData }}
+{% extends "layout.html.twig" %}
+{% block content %}
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+            <!--<div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
+                <div class="row column">
+                    <br>
+                    <img class="thumbnail" src="https://placehold.it/550x350">
+                </div>
+            </div>-->
+
+            <div class="off-canvas-content" data-off-canvas-content>
+
+                <div class="callout">
+                    <div class="row column">
+                        <h1>Dashboard projet Caviste</h1>
+                        <p class="lead">Voici tous nos vins de la base de donnée</p>
+                    </div>
+                </div>
+
+                <div class="row small-up-2 medium-up-3 large-up-5">
+                    {% for wine in wines %}
+                        <div class="column fiche">
+                            <img class="thumbnail" src="http://localhost/caviste/public/vins/{{wine.picture}}">
+                            <p class="wine-type">{{wine.region}}</p>
+                            <p>{{wine.name}}</p>
+                            <p class="wine-price">5 &euro;</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

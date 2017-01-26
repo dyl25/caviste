@@ -1,0 +1,27 @@
+/*.large-up-5 > .column, .large-up-5 > .columns {
+    float: left;
+    width: 19%; }*/
+.fiche {
+    overflow: auto;
+    height: 400px;
+    width: 5%;
+    border-bottom: 4px solid  #f44336;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.fiche p{
+    font-size: 13px;
+    margin-bottom: 3px;
+
+}
+
+.fiche .wine-type {
+    font-weight: bold;
+}
+
+.fiche .wine-price {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    color:  #f44336;
+}

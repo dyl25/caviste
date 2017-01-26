@@ -38,9 +38,9 @@ class WinesController extends Controller {
     public function home(RequestInterface $request, ResponseInterface $response) {
         $model = $this->loadModel('winesModel');
         $result = $model->get_all();
-        var_dump($result);
-        die();
-        $this->render($response, 'wines/home.html.twig');
+        /*var_dump($result);
+        die();*/
+        $this->render($response, 'wines/home.html.twig', ['wines' => $result]);
     }
 
     /**

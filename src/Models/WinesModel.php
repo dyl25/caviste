@@ -15,6 +15,17 @@ class WinesModel {
         $this->container = $container;
     }
 
+    public function get_all() {
+        $result = $this->container->pdo->query("SELECT * FROM wine");
+
+        if ($result != false) {
+            $res = $result->fetchAll(\PDO::FETCH_ASSOC);
+            return $res;
+        }
+
+        return false;
+    }
+
     /**
      * Cherche un vin en particulier si le nom est défini sinon tous les vins
      * @param string $name Le nom du vin
@@ -24,7 +35,7 @@ class WinesModel {
 
         //Recherche de tout les vins
         if ($name == null) {
-            
+
             $result = $this->container->pdo->query("SELECT * FROM wine");
 
             if ($result != false) {
@@ -34,7 +45,7 @@ class WinesModel {
 
             return false;
         }
-        
+
         //Recherche d'un vin en particulier
         $name = $this->container->pdo->quote($name);
         $result = $this->container->pdo->query("SELECT * FROM wine WHERE name=" . $name);
@@ -44,7 +55,7 @@ class WinesModel {
         }
         return false;
     }
-    
+
     /**
      * Recherche un vin grâce à son id
      * @param type $id L'id du vin

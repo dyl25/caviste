@@ -40,7 +40,7 @@ class WinesModel {
         $result = $this->container->pdo->query("SELECT * FROM wine WHERE name=" . $name);
         if ($result != false) {
             $res = $result->fetchAll(\PDO::FETCH_ASSOC);
-            return $res;
+            return $res[0];
         }
         return false;
     }

@@ -22,15 +22,20 @@ class WinesController extends Controller{
     }
 
     public function home(RequestInterface $request, ResponseInterface $response){
-        $model = $this->loadModel('winesModel');
-        $result = $model->search('LAN RIOJA CRIANZA');
-        var_dump($result);
-        die();
-        $this->render($response, 'wines/home.html.twig', $result);
+        $this->render($response, 'wines/home.html.twig');
     }
     
+    /**
+     * Recherche un vin en particulier
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param type $args
+     */
     public function search(RequestInterface $request, ResponseInterface $response, $args) {
-        $this->render($response, 'wines/search.html.twig', ['wineName' => $args['name']]);
+        $model = $this->loadModel('winesModel');
+        $result = $model->search($args['name']);
+        $result = json_encode($result, JSON_PRETTY_PRINT);
+        $this->render($response, 'wines/search.html.twig', ['wineData' => $result]);
     }
 
     public function add(RequestInterface $request, ResponseInterface $response) {

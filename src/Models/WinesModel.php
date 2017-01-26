@@ -44,5 +44,20 @@ class WinesModel {
         }
         return false;
     }
+    
+    /**
+     * Recherche un vin grâce à son id
+     * @param type $id L'id du vin
+     * @return mixed False si pas de résultat sinon un tableau de résultat
+     */
+    public function search_by_id($id) {
+        $id = $this->container->pdo->quote($id);
+        $result = $this->container->pdo->query("SELECT * FROM wine WHERE id=" . $id);
+        if ($result != false) {
+            $res = $result->fetchAll(\PDO::FETCH_ASSOC);
+            return $res[0];
+        }
+        return false;
+    }
 
 }

@@ -12,6 +12,13 @@ use \Psr\Http\Message\ResponseInterface;
  */
 class WinesController extends Controller {
 
+    /**
+     * Affiche au format JSON tous les vins de la DB si il n'y a pas d'argument 
+     * sinon si un id est spécifié le vin avec cet id sera renvoyé
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param type $args
+     */
     public function index(RequestInterface $request, ResponseInterface $response, $args) {
 
         if (empty($args)) {
@@ -21,7 +28,10 @@ class WinesController extends Controller {
             //$this->render($response, 'wines/index.html.twig', ['wineData' => $result]);
             $response->getBody()->write($result);
         } else {
-            $this->render($response, 'wines/search_id.html.twig');
+            $model = $this->loadModel('winesModel');
+            $result = $model->search_by_id($args['id']);
+            $result = nl2br(json_encode($result, JSON_PRETTY_PRINT));
+            $response->getBody()->write($result);
         }
     }
 

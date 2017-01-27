@@ -58,12 +58,17 @@ class WinesController extends Controller {
     }
 
     /**
-     * Réception de donnée au format json vie $_POST, les récupérée et insérer dans la DB
+     * Réception de donnée au format json vie $_POST, les récupérée et insérer 
+     * dans la DB et echo un boolean pour dire si l'insertion s'est bien passée
      * @param RequestInterface $request
      * @param ResponseInterface $response
      */
     public function add(RequestInterface $request, ResponseInterface $response) {
-        true;
+        if(isset($_POST('save'))) {
+            //décodage de la chaine json
+            
+            //envoi vers le modele
+        }
     }
 
 }

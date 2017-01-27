@@ -57,6 +57,11 @@ class WinesController extends Controller {
         //$this->render($response, 'wines/search.html.twig', ['wineData' => $result]);
     }
 
+    /**
+     * Réception de donnée au format json vie $_POST, les récupérée et insérer dans la DB
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     */
     public function add(RequestInterface $request, ResponseInterface $response) {
         true;
     }

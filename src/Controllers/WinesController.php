@@ -53,7 +53,8 @@ class WinesController extends Controller {
         $model = $this->loadModel('winesModel');
         $result = $model->search($args['name']);
         $result = json_encode($result, JSON_PRETTY_PRINT);
-        $this->render($response, 'wines/search.html.twig', ['wineData' => $result]);
+        $response->getBody()->write($result);
+        //$this->render($response, 'wines/search.html.twig', ['wineData' => $result]);
     }
 
     public function add(RequestInterface $request, ResponseInterface $response) {

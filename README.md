@@ -4,6 +4,12 @@
 * Dossier de controller: src/Controller
 * Dossier de vue: src/views
 
+##A l'importation du projet
+
+* composer dump-autoload
+* Redémarer serveur
+* Vider le cache du browser
+
 ## Objectifs
 
 ### Fonctionnalités affichant du JSON

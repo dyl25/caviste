@@ -24,13 +24,13 @@ class WinesController extends Controller {
         if (empty($args)) {
             $model = $this->loadModel('winesModel');
             $result = $model->search();
-            $result = nl2br(json_encode($result, JSON_PRETTY_PRINT));
+            $result = json_encode($result);
             //$this->render($response, 'wines/index.html.twig', ['wineData' => $result]);
             $response->getBody()->write($result);
         } else {
             $model = $this->loadModel('winesModel');
             $result = $model->search_by_id($args['id']);
-            $result = nl2br(json_encode($result, JSON_PRETTY_PRINT));
+            $result = json_encode($result);
             $response->getBody()->write($result);
         }
     }

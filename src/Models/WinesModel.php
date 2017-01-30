@@ -70,5 +70,24 @@ class WinesModel {
         }
         return false;
     }
+    
+    /**
+     * Ajoute un vin
+     * @param type $name Le nom du vin.
+     * @param type $year L'année du vin.
+     * @param type $grapes La grape du vin.
+     * @param type $country Le pays du vin.
+     * @param type $region La region du vin.
+     * @param type $description La description du vin.
+     * @param type $picture L'image associée au vin.
+     */
+    public function add_wines($name, $year, $grapes, $country, $region, $description, $picture) {
+        
+        $query = $this->container->pdo->prepare("INSERT INTO wine(name, year, grapes, country, region, description, picture) VALUES(?,?,?,?,?,?,?)");
+        
+        $result = $query->execute([$name, $year, $grapes, $country, $region, $description, $picture]);
+        
+        return $result;
+    }
 
 }

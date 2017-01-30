@@ -137,5 +137,33 @@ class WinesModel {
         
         return $result;
     }
+    
+    /**
+     * Modifie les informations sur un vin
+     * @param int $id L'id du vin.
+     * @param string $name Le nom du vin.
+     * @param int $year L'année du vin.
+     * @param string $grapes La grape du vin.
+     * @param string $country Le pays du vin.
+     * @param string $region La region du vin.
+     * @param string $description La description du vin.
+     * @param string $picture L'image associée au vin.
+     * @return boolean True si le vin a bien été modifié sinon false.
+     */
+    public function update_wine($id, $name, $year, $grapes, $country, $region, $description, $picture) {
+        if(!is_int($id)) {
+            return false;
+        }
+        
+        if(!$this->dataVerify($name, $year, $grapes, $country, $region, $description, $picture)) {
+            return false;
+        }
+        
+        $query = $this->container->pdo->prepare("UPDATE wine SET name=?, year=?, grapes=?, country=?, region=?, description=?, picture=? WHERE id=?");
+        
+        $result = $query->execute([$name, $year, $grapes, $country, $region, $description, $picture, $id]);
+        
+        return $result;
+    }
 
 }

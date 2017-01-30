@@ -38,8 +38,8 @@ class WinesController extends Controller {
     public function home(RequestInterface $request, ResponseInterface $response) {
         $model = $this->loadModel('winesModel');
         $result = $model->get_all();
-        /*var_dump($result);
-        die();*/
+        /* var_dump($result);
+          die(); */
         $this->render($response, 'wines/home.html.twig', ['wines' => $result]);
     }
 
@@ -65,23 +65,30 @@ class WinesController extends Controller {
      */
     public function add(RequestInterface $request, ResponseInterface $response) {
 
-        if(isset($_POST('save'))) {
-            //décodage de la chaine json
-            
-            //envoi vers le modele
-            $model = $this->loadModel('winesModel');
-            return $model->add_wines($name, $year, $grapes, $country, $region, $description, $picture);
-        }
+        //if(isset($_POST('save'))) {
+        //décodage de la chaine json
+        //envoi vers le modele
+        $model = $this->loadModel('winesModel');
+        return $model->add_wines($name, $year, $grapes, $country, $region, $description, $picture);
+        //}
     }
-    
+
     /**
      * Modifie les information d'un vin.
      * @param int $id L'id du vin à modifier.
+     * @return boolean True si le vin a bien été modifié sinon false
      */
     public function put($id) {
-        true;
+        //if(isset()) {
+        //décodage de la chaine json
+        //
+        //envoi vers le modele
+        $model = $this->loadModel('winesModel');
+
+        return $model->update_wine($id, $name, $year, $grapes, $country, $region, $description, $picture);
+        //}
     }
-    
+
     /**
      * Supprime un vin.
      * @param int $id L'id du vin à supprimer.
@@ -95,7 +102,8 @@ class WinesController extends Controller {
      */
     public function test() {
         $model = $this->loadModel('winesModel');
-        
-        var_dump($model->add_wines(60, 2010, 'grapeTest', 'countryTest', 'regionTest', 'descriptionTest', 'urlPicture'));
+
+        var_dump($model->update_wine('jean', 'vinTestTest2017', 2040, 'grapeTest', 'countryTest2', 'regionTest', 'descriptionTest', 'urlPicture'));
     }
+
 }

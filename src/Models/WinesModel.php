@@ -165,5 +165,22 @@ class WinesModel {
         
         return $result;
     }
+    
+    /**
+     * Supprime les informations sur un vin
+     * @param int $id L'id du vin.
+     * @return boolean True si le vin a bien été supprimé sinon false.
+     */
+    public function delete_wine($id) {
+        if(!is_int($id)) {
+            return false;
+        }
+        
+        $query = $this->container->pdo->prepare("DELETE FROM wine WHERE id=?");
+        
+        $result = $query->execute([$id]);
+        
+        return $result;
+    }
 
 }

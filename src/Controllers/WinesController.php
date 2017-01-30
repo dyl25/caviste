@@ -92,9 +92,12 @@ class WinesController extends Controller {
     /**
      * Supprime un vin.
      * @param int $id L'id du vin à supprimer.
+     * @return boolean True si le vin a bien été supprimé sinon false
      */
     public function delete($id) {
-        true;
+        $model = $this->loadModel('winesModel');
+
+        return $model->delete_wine($id);
     }
 
     /**
@@ -103,7 +106,7 @@ class WinesController extends Controller {
     public function test() {
         $model = $this->loadModel('winesModel');
 
-        var_dump($model->update_wine('jean', 'vinTestTest2017', 2040, 'grapeTest', 'countryTest2', 'regionTest', 'descriptionTest', 'urlPicture'));
+        var_dump($model->delete_wine('14'));
     }
 
 }

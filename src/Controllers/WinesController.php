@@ -70,5 +70,21 @@ class WinesController extends Controller {
             //envoi vers le modele
         }
     }
+    
+    /**
+     * Modifie les information d'un vin.
+     * @param int $id L'id du vin à modifier.
+     */
+    public function put($id) {
+        true;
+    }
+    
+    /**
+     * Supprime un vin.
+     * @param int $id L'id du vin à supprimer.
+     */
+    public function delete($id) {
+        true;
+    }
 
 }

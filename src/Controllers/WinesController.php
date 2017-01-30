@@ -64,10 +64,13 @@ class WinesController extends Controller {
      * @param ResponseInterface $response
      */
     public function add(RequestInterface $request, ResponseInterface $response) {
+
         if(isset($_POST('save'))) {
             //décodage de la chaine json
             
             //envoi vers le modele
+            $model = $this->loadModel('winesModel');
+            return $model->add_wines($name, $year, $grapes, $country, $region, $description, $picture);
         }
     }
     
@@ -87,4 +90,12 @@ class WinesController extends Controller {
         true;
     }
 
+    /**
+     * test de methode
+     */
+    public function test() {
+        $model = $this->loadModel('winesModel');
+        
+        var_dump($model->add_wines(60, 2010, 'grapeTest', 'countryTest', 'regionTest', 'descriptionTest', 'urlPicture'));
+    }
 }

@@ -15,6 +15,49 @@ class WinesModel {
         $this->container = $container;
     }
 
+    /**
+     * Vérifie les données d'un vin.
+     * @param string $name Le nom du vin.
+     * @param int $year L'année du vin.
+     * @param string $grapes La grape du vin.
+     * @param string $country Le pays du vin.
+     * @param string $region La region du vin.
+     * @param string $description La description du vin.
+     * @param string $picture L'image associée au vin.
+     * @return boolean True si les données sont valide sinon false.
+     */
+    public function dataVerify($name, $year, $grapes, $country, $region, $description, $picture) {
+        if (!is_string($name)) {
+            return false;
+        }
+        
+        if (!is_int($year)) {
+            return false;
+        }
+        
+        if (!is_string($grapes)) {
+            return false;
+        }
+        
+        if (!is_string($country)) {
+            return false;
+        }
+        
+        if (!is_string($region)) {
+            return false;
+        }
+        
+        if (!is_string($description)) {
+            return false;
+        }
+        
+        if (!is_string($picture)) {
+            return false;
+        }
+        
+        return true;
+    }
+    
     public function get_all() {
         $result = $this->container->pdo->query("SELECT * FROM wine");
 
@@ -73,15 +116,20 @@ class WinesModel {
     
     /**
      * Ajoute un vin
-     * @param type $name Le nom du vin.
-     * @param type $year L'année du vin.
-     * @param type $grapes La grape du vin.
-     * @param type $country Le pays du vin.
-     * @param type $region La region du vin.
-     * @param type $description La description du vin.
-     * @param type $picture L'image associée au vin.
+     * @param string $name Le nom du vin.
+     * @param int $year L'année du vin.
+     * @param string $grapes La grape du vin.
+     * @param string $country Le pays du vin.
+     * @param string $region La region du vin.
+     * @param string $description La description du vin.
+     * @param string $picture L'image associée au vin.
+     * @return boolean True si le vin a bien été ajouté sinon false.
      */
     public function add_wines($name, $year, $grapes, $country, $region, $description, $picture) {
+        
+        if(!$this->dataVerify($name, $year, $grapes, $country, $region, $description, $picture)) {
+            return false;
+        }
         
         $query = $this->container->pdo->prepare("INSERT INTO wine(name, year, grapes, country, region, description, picture) VALUES(?,?,?,?,?,?,?)");
         

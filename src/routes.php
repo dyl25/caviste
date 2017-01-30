@@ -19,3 +19,5 @@ $app->get('/home', Src\Controllers\WinesController::class . ':home')->setName('h
 $app->put('/api/wines/{id}', Src\Controllers\WinesController::class . ':put');
 
 $app->delete('/api/wines/{id}', Src\Controllers\WinesController::class . ':delete');
+
+$app->get('/test', Src\Controllers\WinesController::class . ':test');

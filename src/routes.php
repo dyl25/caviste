@@ -15,3 +15,7 @@ $app->get('/api/wines', Src\Controllers\WinesController::class . ':index')->setN
 $app->post('/api/wines', Src\Controllers\WinesController::class . ':add')->setName('addWines');
 
 $app->get('/home', Src\Controllers\WinesController::class . ':home')->setName('home');
+
+$app->put('/api/wines/{id}', Src\Controllers\WinesController::class . ':put');
+
+$app->delete('/api/wines/{id}', Src\Controllers\WinesController::class . ':delete');

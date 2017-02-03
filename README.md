@@ -1,4 +1,10 @@
-# Projet caviste - partie backend
+# Projet caviste - partie backend (version redbean)
+
+Redbean a été installé à l'aide composer. Version "single file de redbean"
+Téléchargé à partir de ce compte Github https://github.com/yeriomin/redbean-single-file
+
+Seul le fichier WinesModel a été modifié par rapport à la version PDO
+
 
 * Fichier de route: src/routes.php
 * Dossier de controller: src/Controller

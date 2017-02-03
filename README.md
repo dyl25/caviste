@@ -9,6 +9,7 @@
 * composer dump-autoload
 * Redémarer serveur
 * Vider le cache du browser
+* Si ça ne marche toujours pas composer update
 
 ## Objectifs
 

@@ -66,7 +66,15 @@ class WinesController extends Controller {
     public function add(RequestInterface $request, ResponseInterface $response) {
 
         //if(isset($_POST('save'))) {
-        //décodage de la chaine json
+        
+        $name = $_POST['name'];
+        $year = $_POST['year'];
+        $grapes = $_POST['grapes'];
+        $country = $_POST['country'];
+        $region = $_POST['region'];
+        $description = $_POST['description'];
+        $picture = $_POST['picture'];
+        
         //envoi vers le modele
         $model = $this->loadModel('winesModel');
         return $model->add_wines($name, $year, $grapes, $country, $region, $description, $picture);
@@ -80,8 +88,14 @@ class WinesController extends Controller {
      */
     public function put($id) {
         //if(isset()) {
-        //décodage de la chaine json
-        //
+        $name = $_POST['name'];
+        $year = $_POST['year'];
+        $grapes = $_POST['grapes'];
+        $country = $_POST['country'];
+        $region = $_POST['region'];
+        $description = $_POST['description'];
+        $picture = $_POST['picture'];
+        
         //envoi vers le modele
         $model = $this->loadModel('winesModel');
 

@@ -62,13 +62,16 @@ class WinesController extends Controller {
      * @param ResponseInterface $response
      */
     public function add(RequestInterface $request, ResponseInterface $response) {
-
-        //if(isset($_POST('save'))) {
-        //décodage de la chaine json
-        //envoi vers le modele
-        $model = $this->loadModel('winesModel');
-        return $model->add_wines($name, $year, $grapes, $country, $region, $description, $picture);
-        //}
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            if ($_SERVER['HTTP_REFERER'] == "moncellier.localhost") {
+                //if(isset($_POST('save'))) {
+                //décodage de la chaine json
+                //envoi vers le modele
+                $model = $this->loadModel('winesModel');
+                return $model->add_wines($name, $year, $grapes, $country, $region, $description, $picture);
+                //}
+            }
+        }
     }
 
     /**
@@ -77,14 +80,18 @@ class WinesController extends Controller {
      * @return boolean True si le vin a bien été modifié sinon false
      */
     public function put($id) {
-        //if(isset()) {
-        //décodage de la chaine json
-        //
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            if ($_SERVER['HTTP_REFERER'] == 'moncellier.localhost') {
+                //if(isset()) {
+                //décodage de la chaine json
+                //
         //envoi vers le modele
-        $model = $this->loadModel('winesModel');
+                $model = $this->loadModel('winesModel');
 
-        return $model->update_wine($id, $name, $year, $grapes, $country, $region, $description, $picture);
-        //}
+                return $model->update_wine($id, $name, $year, $grapes, $country, $region, $description, $picture);
+                //}
+            }
+        }
     }
 
     /**
@@ -93,9 +100,12 @@ class WinesController extends Controller {
      * @return boolean True si le vin a bien été supprimé sinon false
      */
     public function delete($id) {
-        $model = $this->loadModel('winesModel');
-
-        return $model->delete_wine($id);
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            if ($_SERVER['HTTP_REFERER'] == 'moncellier.localhost') {
+                $model = $this->loadModel('winesModel');
+                return $model->delete_wine($id);
+            }
+        }
     }
 
 }

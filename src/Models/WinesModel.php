@@ -85,27 +85,30 @@ class WinesModel
      */
     public function search($name = null)
     {
-        //REDBEAN//$books = R::find( 'book', ' title LIKE ? ', [ 'Learn to%' ] );
-        //ou
-        //findLike
-        //Recherche de tout les vins
-        if (!$name)
+        if ($_SERVER['HTTP_REFERER'] == 'moncellier.localhost')
         {
-            $res = \R::findAll('wine');
-            if ($res)
+            //REDBEAN//$books = R::find( 'book', ' title LIKE ? ', [ 'Learn to%' ] );
+            //ou
+            //findLike
+            //Recherche de tout les vins
+            if (!$name)
             {
-                return $res;
+                $res = \R::findAll('wine');
+                if ($res)
+                {
+                    return $res;
+                }
+                return false;
+            }
+
+            //Recherche d'un vin en particulier
+            $result = \R::findLike('wine', ['name' => [$name]]);
+            if ($result)
+            {
+                return $result;
             }
             return false;
         }
-
-        //Recherche d'un vin en particulier
-        $result = \R::findLike('wine', ['name' => [$name]]);
-        if ($result)
-        {
-            return $result;
-        }
-        return false;
     }
 
     /**
@@ -115,15 +118,16 @@ class WinesModel
      */
     public function search_by_id($id = null)
     {
-        if ($id > 0)
+        if ($_SERVER['HTTP_REFERER'] == 'moncellier.localhost')
         {
-            $result = \R::findOne('wine', 'id = ' . $id);
-            if ($result)
+            if ($id > 0)
             {
+                $result = \R::findOne('wine', 'id = ' . $id);
                 return $result;
+                
             }
+            return false;
         }
-        return false;
     }
 
     /**
@@ -139,24 +143,22 @@ class WinesModel
      */
     public function add_wines($name, $year, $grapes, $country, $region, $description, $picture)
     {
-
         if (!$this->dataVerify($name, $year, $grapes, $country, $region, $description, $picture))
         {
             return false;
         }
-        
-//        $wine = \R::dispense('wine');
-//        $wine->name = $name;
-//        $wine->year = $year;
-//        $wine->grapes = $grapes;
-//        $wine->country = $country;
-//        $wine->region = $region;
-//        $wine->description = $description;
-//        $wine->picture = $picture;
-        
-        $query = $this->container->pdo->prepare("INSERT INTO wine(name, year, grapes, country, region, description, picture) VALUES(?,?,?,?,?,?,?)");
 
-        $result = $query->execute([$name, $year, $grapes, $country, $region, $description, $picture]);
+        $wine = \R::dispense('wine');
+        $wine->name = $name;
+        $wine->year = $year;
+        $wine->grapes = $grapes;
+        $wine->country = $country;
+        $wine->region = $region;
+        $wine->description = $description;
+        $wine->picture = $picture;
+        
+        //si l'opération c'est bien passée Redbean renvoi l'id de l'objet inséré.
+        $result = \R::store($wine);
 
         return $result;
     }
@@ -175,21 +177,27 @@ class WinesModel
      */
     public function update_wine($id, $name, $year, $grapes, $country, $region, $description, $picture)
     {
-        if (!is_int($id))
+        if ($_SERVER['HTTP_REFERER'] == 'moncellier.localhost')
         {
-            return false;
+            if (!is_int($id) || !$this->dataVerify($name, $year, $grapes, $country, $region, $description, $picture))
+            {
+                return false;
+            }
+            
+            //chargement du vin à modifier
+            $wine = \R::load('wine', $id);
+            $wine->name = $name;
+            $wine->year = $year;
+            $wine->grapes = $grapes;
+            $wine->country = $country;
+            $wine->region = $region;
+            $wine->description = $description;
+            $wine->picture = $picture;
+            
+            $result = \R::Store($wine);
+
+            return $result;
         }
-
-        if (!$this->dataVerify($name, $year, $grapes, $country, $region, $description, $picture))
-        {
-            return false;
-        }
-
-        $query = $this->container->pdo->prepare("UPDATE wine SET name=?, year=?, grapes=?, country=?, region=?, description=?, picture=? WHERE id=?");
-
-        $result = $query->execute([$name, $year, $grapes, $country, $region, $description, $picture, $id]);
-
-        return $result;
     }
 
     /**
@@ -199,16 +207,18 @@ class WinesModel
      */
     public function delete_wine($id)
     {
-        if (!is_int($id))
+        if ($_SERVER['HTTP_REFERER'] == 'moncellier.localhost')
         {
-            return false;
+            if (!is_int($id))
+            {
+                return false;
+            }
+            
+            $wine = \R::load('wine', $id);            
+            $result = \R::trash($wine);
+
+            return $result;
         }
-
-        $query = $this->container->pdo->prepare("DELETE FROM wine WHERE id=?");
-
-        $result = $query->execute([$id]);
-
-        return $result;
     }
 
 }

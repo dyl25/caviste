@@ -10,7 +10,7 @@ use \Psr\Http\Message\ResponseInterface;
 class WinesController extends Controller {
     /**
      * Affiche au format JSON tous les vins de la DB si il n'y a pas d'argument 
-     * sinon si un id est spécifié le vin avec cet id sera renvoyé
+     * sinon si un id est spï¿½cifiï¿½ le vin avec cet id sera renvoyï¿½
      * @param RequestInterface $request
      * @param ResponseInterface $response
      * @param type $args
@@ -48,16 +48,21 @@ class WinesController extends Controller {
         //$this->render($response, 'wines/search.html.twig', ['wineData' => $result]);
     }
     /**
-     * Réception de donnée au format json vie $_POST, les récupérée et insérer 
-     * dans la DB et echo un boolean pour dire si l'insertion s'est bien passée
+     * Rï¿½ception de donnï¿½e au format json vie $_POST, les rï¿½cupï¿½rï¿½e et insï¿½rer 
+     * dans la DB et echo un boolean pour dire si l'insertion s'est bien passï¿½e
      * @param RequestInterface $request
      * @param ResponseInterface $response
      */
     public function add(RequestInterface $request, ResponseInterface $response) {
         if (isset($_SERVER['HTTP_REFERER'])) {
             if ($_SERVER['HTTP_REFERER'] == "moncellier.localhost") {
-                //if(isset($_POST('save'))) {
-                //décodage de la chaine json
+                $name = $_POST['name'];
+                $year = $_POST['year'];
+                $grapes = $_POST['grapes'];
+                $country = $_POST['country'];
+                $region = $_POST['region'];
+                $description = $_POST['description'];
+                $picture = $_POST['picture'];
                 //envoi vers le modele
                 $model = $this->loadModel('winesModel');
                 return $model->add_wines($name, $year, $grapes, $country, $region, $description, $picture);
@@ -67,14 +72,19 @@ class WinesController extends Controller {
     }
     /**
      * Modifie les information d'un vin.
-     * @param int $id L'id du vin à modifier.
-     * @return boolean True si le vin a bien été modifié sinon false
+     * @param int $id L'id du vin ï¿½ modifier.
+     * @return boolean True si le vin a bien ï¿½tï¿½ modifiï¿½ sinon false
      */
     public function put($id) {
         if (isset($_SERVER['HTTP_REFERER'])) {
             if ($_SERVER['HTTP_REFERER'] == 'moncellier.localhost') {
-                //if(isset()) {
-                //décodage de la chaine json
+                $name = $_POST['name'];
+                $year = $_POST['year'];
+                $grapes = $_POST['grapes'];
+                $country = $_POST['country'];
+                $region = $_POST['region'];
+                $description = $_POST['description'];
+                $picture = $_POST['picture'];
                 //
         //envoi vers le modele
                 $model = $this->loadModel('winesModel');
@@ -85,8 +95,8 @@ class WinesController extends Controller {
     }
     /**
      * Supprime un vin.
-     * @param int $id L'id du vin à supprimer.
-     * @return boolean True si le vin a bien été supprimé sinon false
+     * @param int $id L'id du vin ï¿½ supprimer.
+     * @return boolean True si le vin a bien ï¿½tï¿½ supprimï¿½ sinon false
      */
     public function delete($id) {
         if (isset($_SERVER['HTTP_REFERER'])) {

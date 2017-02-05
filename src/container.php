@@ -4,7 +4,7 @@
 $container = $app->getContainer();
 
 /* Redbean connection */
-\R::setup('mysql:host=localhost;dbname=cavavin', 'root', '');
+\R::setup('mysql:host=localhost;dbname=cavavin', 'root', 'root');
 
 // Register component on container
 $container['view'] = function ($container) {

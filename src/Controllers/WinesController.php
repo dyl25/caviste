@@ -1,17 +1,13 @@
 <?php
-
 namespace Src\Controllers;
-
 use \Psr\Http\Message\RequestInterface;
 use \Psr\Http\Message\ResponseInterface;
-
 /**
  * Description of WinesController
  *
  * @author admin
  */
 class WinesController extends Controller {
-
     /**
      * Affiche au format JSON tous les vins de la DB si il n'y a pas d'argument 
      * sinon si un id est spécifié le vin avec cet id sera renvoyé
@@ -20,7 +16,6 @@ class WinesController extends Controller {
      * @param type $args
      */
     public function index(RequestInterface $request, ResponseInterface $response, $args) {
-
         if (empty($args)) {
             $model = $this->loadModel('winesModel');
             $result = $model->search();
@@ -34,13 +29,11 @@ class WinesController extends Controller {
             $response->getBody()->write($result);
         }
     }
-
     public function home(RequestInterface $request, ResponseInterface $response) {
         $model = $this->loadModel('winesModel');
         $result = $model->get_all();
         $this->render($response, 'wines/home.html.twig', ['wines' => $result]);
     }
-
     /**
      * Recherche un vin en particulier
      * @param RequestInterface $request
@@ -54,7 +47,6 @@ class WinesController extends Controller {
         $response->getBody()->write($result);
         //$this->render($response, 'wines/search.html.twig', ['wineData' => $result]);
     }
-
     /**
      * Réception de donnée au format json vie $_POST, les récupérée et insérer 
      * dans la DB et echo un boolean pour dire si l'insertion s'est bien passée
@@ -73,7 +65,6 @@ class WinesController extends Controller {
             }
         }
     }
-
     /**
      * Modifie les information d'un vin.
      * @param int $id L'id du vin à modifier.
@@ -87,13 +78,11 @@ class WinesController extends Controller {
                 //
         //envoi vers le modele
                 $model = $this->loadModel('winesModel');
-
                 return $model->update_wine($id, $name, $year, $grapes, $country, $region, $description, $picture);
                 //}
             }
         }
     }
-
     /**
      * Supprime un vin.
      * @param int $id L'id du vin à supprimer.
@@ -107,5 +96,4 @@ class WinesController extends Controller {
             }
         }
     }
-
 }

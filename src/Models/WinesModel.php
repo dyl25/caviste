@@ -85,6 +85,7 @@ class WinesModel
      */
     public function search($name = null)
     {
+
         //REDBEAN//$books = R::find( 'book', ' title LIKE ? ', [ 'Learn to%' ] );
         //ou
         //findLike
@@ -118,10 +119,7 @@ class WinesModel
         if ($id > 0)
         {
             $result = \R::findOne('wine', 'id = ' . $id);
-            if ($result)
-            {
-                return $result;
-            }
+            return $result;
         }
         return false;
     }
@@ -139,24 +137,22 @@ class WinesModel
      */
     public function add_wines($name, $year, $grapes, $country, $region, $description, $picture)
     {
-
         if (!$this->dataVerify($name, $year, $grapes, $country, $region, $description, $picture))
         {
             return false;
         }
-        
-//        $wine = \R::dispense('wine');
-//        $wine->name = $name;
-//        $wine->year = $year;
-//        $wine->grapes = $grapes;
-//        $wine->country = $country;
-//        $wine->region = $region;
-//        $wine->description = $description;
-//        $wine->picture = $picture;
-        
-        $query = $this->container->pdo->prepare("INSERT INTO wine(name, year, grapes, country, region, description, picture) VALUES(?,?,?,?,?,?,?)");
 
-        $result = $query->execute([$name, $year, $grapes, $country, $region, $description, $picture]);
+        $wine = \R::dispense('wine');
+        $wine->name = $name;
+        $wine->year = $year;
+        $wine->grapes = $grapes;
+        $wine->country = $country;
+        $wine->region = $region;
+        $wine->description = $description;
+        $wine->picture = $picture;
+
+        //si l'opération c'est bien passée Redbean renvoi l'id de l'objet inséré.
+        $result = \R::store($wine);
 
         return $result;
     }
@@ -175,19 +171,22 @@ class WinesModel
      */
     public function update_wine($id, $name, $year, $grapes, $country, $region, $description, $picture)
     {
-        if (!is_int($id))
+        if (!is_int($id) || !$this->dataVerify($name, $year, $grapes, $country, $region, $description, $picture))
         {
             return false;
         }
 
-        if (!$this->dataVerify($name, $year, $grapes, $country, $region, $description, $picture))
-        {
-            return false;
-        }
+        //chargement du vin à modifier
+        $wine = \R::load('wine', $id);
+        $wine->name = $name;
+        $wine->year = $year;
+        $wine->grapes = $grapes;
+        $wine->country = $country;
+        $wine->region = $region;
+        $wine->description = $description;
+        $wine->picture = $picture;
 
-        $query = $this->container->pdo->prepare("UPDATE wine SET name=?, year=?, grapes=?, country=?, region=?, description=?, picture=? WHERE id=?");
-
-        $result = $query->execute([$name, $year, $grapes, $country, $region, $description, $picture, $id]);
+        $result = \R::Store($wine);
 
         return $result;
     }
@@ -204,9 +203,8 @@ class WinesModel
             return false;
         }
 
-        $query = $this->container->pdo->prepare("DELETE FROM wine WHERE id=?");
-
-        $result = $query->execute([$id]);
+        $wine = \R::load('wine', $id);
+        $result = \R::trash($wine);
 
         return $result;
     }

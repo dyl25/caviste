@@ -85,30 +85,28 @@ class WinesModel
      */
     public function search($name = null)
     {
-        if ($_SERVER['HTTP_REFERER'] == 'moncellier.localhost')
-        {
-            //REDBEAN//$books = R::find( 'book', ' title LIKE ? ', [ 'Learn to%' ] );
-            //ou
-            //findLike
-            //Recherche de tout les vins
-            if (!$name)
-            {
-                $res = \R::findAll('wine');
-                if ($res)
-                {
-                    return $res;
-                }
-                return false;
-            }
 
-            //Recherche d'un vin en particulier
-            $result = \R::findLike('wine', ['name' => [$name]]);
-            if ($result)
+        //REDBEAN//$books = R::find( 'book', ' title LIKE ? ', [ 'Learn to%' ] );
+        //ou
+        //findLike
+        //Recherche de tout les vins
+        if (!$name)
+        {
+            $res = \R::findAll('wine');
+            if ($res)
             {
-                return $result;
+                return $res;
             }
             return false;
         }
+
+        //Recherche d'un vin en particulier
+        $result = \R::findLike('wine', ['name' => [$name]]);
+        if ($result)
+        {
+            return $result;
+        }
+        return false;
     }
 
     /**
@@ -118,16 +116,12 @@ class WinesModel
      */
     public function search_by_id($id = null)
     {
-        if ($_SERVER['HTTP_REFERER'] == 'moncellier.localhost')
+        if ($id > 0)
         {
-            if ($id > 0)
-            {
-                $result = \R::findOne('wine', 'id = ' . $id);
-                return $result;
-                
-            }
-            return false;
+            $result = \R::findOne('wine', 'id = ' . $id);
+            return $result;
         }
+        return false;
     }
 
     /**
@@ -156,7 +150,7 @@ class WinesModel
         $wine->region = $region;
         $wine->description = $description;
         $wine->picture = $picture;
-        
+
         //si l'opération c'est bien passée Redbean renvoi l'id de l'objet inséré.
         $result = \R::store($wine);
 
@@ -177,27 +171,24 @@ class WinesModel
      */
     public function update_wine($id, $name, $year, $grapes, $country, $region, $description, $picture)
     {
-        if ($_SERVER['HTTP_REFERER'] == 'moncellier.localhost')
+        if (!is_int($id) || !$this->dataVerify($name, $year, $grapes, $country, $region, $description, $picture))
         {
-            if (!is_int($id) || !$this->dataVerify($name, $year, $grapes, $country, $region, $description, $picture))
-            {
-                return false;
-            }
-            
-            //chargement du vin à modifier
-            $wine = \R::load('wine', $id);
-            $wine->name = $name;
-            $wine->year = $year;
-            $wine->grapes = $grapes;
-            $wine->country = $country;
-            $wine->region = $region;
-            $wine->description = $description;
-            $wine->picture = $picture;
-            
-            $result = \R::Store($wine);
-
-            return $result;
+            return false;
         }
+
+        //chargement du vin à modifier
+        $wine = \R::load('wine', $id);
+        $wine->name = $name;
+        $wine->year = $year;
+        $wine->grapes = $grapes;
+        $wine->country = $country;
+        $wine->region = $region;
+        $wine->description = $description;
+        $wine->picture = $picture;
+
+        $result = \R::Store($wine);
+
+        return $result;
     }
 
     /**
@@ -207,18 +198,15 @@ class WinesModel
      */
     public function delete_wine($id)
     {
-        if ($_SERVER['HTTP_REFERER'] == 'moncellier.localhost')
+        if (!is_int($id))
         {
-            if (!is_int($id))
-            {
-                return false;
-            }
-            
-            $wine = \R::load('wine', $id);            
-            $result = \R::trash($wine);
-
-            return $result;
+            return false;
         }
+
+        $wine = \R::load('wine', $id);
+        $result = \R::trash($wine);
+
+        return $result;
     }
 
 }

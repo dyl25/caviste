@@ -85,10 +85,6 @@ class WinesModel
      */
     public function search($name = null)
     {
-
-        //REDBEAN//$books = R::find( 'book', ' title LIKE ? ', [ 'Learn to%' ] );
-        //ou
-        //findLike
         //Recherche de tout les vins
         if (!$name)
         {
@@ -188,7 +184,7 @@ class WinesModel
 
         $result = \R::Store($wine);
 
-        return $result > 0 && $result !== false;
+        return $result > 0;
     }
 
     /**
@@ -206,7 +202,7 @@ class WinesModel
         $wine = \R::load('wine', $id);
         $result = \R::trash($wine);
 
-        return $result > 0 && $result !== false;
+        return $result > 0;
     }
 
 }
